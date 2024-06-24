@@ -2,7 +2,7 @@ package org.example.recapspring.model;
 
 public enum Status {
     OPEN("OPEN"),
-    DOING("DOING"),
+    IN_PROGRESS("IN_PROGRESS"),
     DONE("DONE");
 
     private final String name;

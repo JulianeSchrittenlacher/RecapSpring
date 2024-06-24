@@ -19,22 +19,22 @@ class TodoServiceTest {
     private final UtilService mockUtilService = mock(UtilService.class);
     TodoService service = new TodoService(mockRepo, mockUtilService);
 
-//    @Test
-//    void save() {
-//        //GIVEN
-//        TodoDTO dto1 = new TodoDTO("Hallo", Status.OPEN);
-//        Todo expected = new Todo(mockUtilService.generateId(),"Hallo", Status.OPEN);
-//        //WHEN THEN
-//        service.saveTodo(dto);
-//
-//
-//        Todo actual = new Todo();
-//        assertEquals(expected,actual);
-//        // assertEquals(1,actual.id());
-//        verify(mockRepo).save(expected);
-//        //  verify(service).save(dto);
-//        verify(mockUtilService).generateId();
-//    }
+    @Test
+    void save() {
+        //GIVEN
+        TodoDTO dto1 = new TodoDTO("Hallo", Status.OPEN);
+        Todo expected = new Todo(mockUtilService.generateId(),"Hallo", Status.OPEN);
+        //WHEN THEN
+        service.saveTodo(dto);
+
+
+        Todo actual = new Todo();
+        assertEquals(expected,actual);
+        // assertEquals(1,actual.id());
+        verify(mockRepo).save(expected);
+        //  verify(service).save(dto);
+        verify(mockUtilService).generateId();
+    }
 
     @Test
     void getAllTodos() {

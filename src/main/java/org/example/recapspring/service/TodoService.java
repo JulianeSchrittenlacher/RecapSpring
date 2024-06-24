@@ -36,16 +36,12 @@ public class TodoService {
         if(repo.existsById(id)) {
             Todo foundTodo;
             switch (todoDTO.status()) {
-                case Status.DOING -> {
-                    foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.DOING);
+                case Status.IN_PROGRESS -> {
+                    foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.IN_PROGRESS);
                     repo.save(foundTodo);
                 }
                 case Status.DONE -> {
                     foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.DONE);
-                    repo.save(foundTodo);
-                }
-                case Status.OPEN -> {
-                    foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.OPEN);
                     repo.save(foundTodo);
                 }
             }
