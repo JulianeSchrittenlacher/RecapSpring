@@ -35,25 +35,21 @@ public class TodoService {
     public void updateTodo(String id, TodoDTO todoDTO) {
         if(repo.existsById(id)) {
             Todo foundTodo;
-            if(todoDTO.status().getName().equals("DOING")) {
-                foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.DOING);
-                repo.save(foundTodo);
-            }
-            else if (todoDTO.status().getName().equals("DONE")) {
-                foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.DONE);
-                repo.save(foundTodo);
-            } else if (todoDTO.status().getName().equals("OPEN")) {
-                foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.OPEN);
-                repo.save(foundTodo);
-                
+            switch (todoDTO.status()) {
+                case Status.DOING -> {
+                    foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.DOING);
+                    repo.save(foundTodo);
+                }
+                case Status.DONE -> {
+                    foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.DONE);
+                    repo.save(foundTodo);
+                }
+                case Status.OPEN -> {
+                    foundTodo = repo.findById(id).orElseThrow().withDescription(todoDTO.description()).withStatus(Status.OPEN);
+                    repo.save(foundTodo);
+                }
             }
         }
-//        Todo toUpdate = repo.findById(id).orElseThrow();
-//        if (todoDTO.status().equals(Status.OPEN)) {
-//            repo.save(toUpdate.withDescription(todoDTO.description()).withStatus(Status.DOING));
-//        } else if (todoDTO.status().equals(Status.DOING)) {
-//            repo.save(toUpdate.withDescription(todoDTO.description()).withStatus(Status.DONE));
-//        }
 
     }
 
